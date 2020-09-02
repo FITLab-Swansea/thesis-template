@@ -1,0 +1,62 @@
+% !TEX root = thesis.tex
+%% Here you can specify new packages, commands and environments that you intend
+%% to use. Using custom commands (for example, those for e.g., i.e., etc. below)
+%% can make your document easier to write, read and more consistent.
+\usepackage{float} % Adds the [H] option for forced figure placement
+\usepackage[norefs,nocites]{refcheck} % Check and warn about unused labels
+\usepackage[export]{adjustbox} % Used to add a frame around figures
+
+% We are writing in British English
+\usepackage[british]{babel}
+
+% How many levels of sections/subsections etc to display in the Table of Contents
+\setcounter{tocdepth}{1}
+
+% Space out lines slightly - 1.5 spacing is overly severe, so we go for a 
+% more visually pleasing 1.31
+\linespread{1.31}
+
+% Common shortcuts for consistency - this allows you to write, for example, 
+% \eg in LaTeX instead of typing e.g., so that every single instance will be 
+% formatted identically. If you later want to change one of these definitions, 
+% all usages throughout the document will be updated.
+\newcommand{\eg}{e.g.,\xspace}
+\newcommand{\ie}{i.e.,\xspace}
+\newcommand{\etc}{etc.\@\xspace}
+\newcommand{\cf}{cf.\xspace}
+\newcommand{\vs}{vs.\xspace}
+\newcommand{\etal}{et al.\xspace}
+\newcommand{\sd}{s.d.\xspace}
+\newcommand{\elide}{[\,\ldots]\xspace}
+\newcommand{\edots}{\,\ldots}
+
+% Figure caption formatting
+\usepackage[font=small,skip=1em]{caption}
+\usepackage[labelformat=simple]{subfig}
+\renewcommand{\thesubfigure}{\alph{subfigure})}
+
+% Code listing formatting
+\usepackage[final]{listings} % "final" option means show listings even in draft mode
+\usepackage{lstautogobble}
+\usepackage{sourcecodepro}
+\pdfmapfile{=SourceCodePro.map}
+\lstset{
+	xleftmargin=0.5cm,frame=tlbr,framesep=4pt,framerule=0.5pt,
+	language=,
+	upquote=true,
+	columns=fixed,
+	tabsize=2,
+	extendedchars=true,
+	breaklines=true,
+	numbers=left,
+	numbersep=10pt,
+	basicstyle=\ttfamily\scriptsize,
+	numberstyle=\tiny,
+	stringstyle=\ttfamily,
+	captionpos=b,
+	showstringspaces=false,
+	autogobble=true
+}
+
+% Use IEEEtran citation style
+\bibliographystyle{IEEEtran} 

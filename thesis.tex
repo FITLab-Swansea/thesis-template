@@ -1,0 +1,144 @@
+%% NOTE: The LaTeX format of this template is the authoritative version, but if you 
+%% wish you may convert it to, e.g., Word or Google Docs format for editing. Recent 
+%% versions of Word and LibreOffice can natively edit PDF files, as can Google Docs
+%% (with minor formatting issues you will need to correct). Alternatively, you can use 
+%% pandoc (and other free online conversion tools such as those listed here: 
+%% https://softwarerecs.stackexchange.com/questions/1361/)
+
+% Global template configuration (see custard.cls for details)
+% Two-sided means the left and right margins are different sizes and they alternate 
+% every page. If your document is printed to be book or spiral bound this allows for a 
+% thick spine that does not eat into the space for your page content. 
+% You can also add "draft" as an option if needed, which clearly marks the document 
+% as a draft, hides the declaration, dedication, acknowledgements and appendix, 
+% and forces one-sided mode to save space.
+\documentclass[11pt, a4paper, twoside, openright]{custard}
+
+
+% All imports, packages and configuration go in here. Your document should be 
+% about content, so we abstract away the styling rules and tools we are using. 
+\input{customisation}
+
+
+\begin{document}
+	
+% The custom data for Swansea University and your degree.
+% Your name and (for all except Doctoral theses), your student number
+	\title{Thesis Template}
+	\author{A. N. Other}
+	\studentnumber{1234567}
+	\awardinginst{Swansea University}
+	
+% Comment / uncomment your degree type as needed.
+	%\degree{Bachelor of Science} 
+	\degree{Master of Science}
+	%\degree{Doctor of Philosophy}
+	
+% Institution details and logo
+	\department{Department of Computer Science}
+	\university{Swansea University}
+	\unilogo{swansea-logo.pdf}
+	
+% Hard code the date or allow the LaTeX compiler to fill it in 
+% whenever you recompile the document.
+	\date{30th September 2020}
+	%\date{\today}
+	
+% Build the title and declaration pages, and pad the document so the text starts 
+% on a right-hand book page. Page numbering is in roman numerals until the first 
+% page of an actual chapter, which resets numbers starting from 1 at that point. 
+	\frontmatter
+	\maketitle
+	\declaration
+	\cleardoublepage
+	
+% Most significant books and theses have a brief foreword or dedication. 
+% Shorter documents normally do not - remove / comment out if necessary.
+	\ifdraftdoc\else
+	\begin{vplace}[0.7]
+		\begin{large}
+			\begin{center}
+				\textit{I would like to dedicate this work to\edots}
+			\end{center}
+		\end{large}
+	\end{vplace}
+	\fi
+
+% The abstract comes before the contents page. Note how each sentence is 
+% written on a new line - this is an optional convention that can make it easier 
+% to compare versions of your document using automated tools (e.g., diff).
+	\begin{abstract}
+		\vspace{-2em}
+		\setcounter{page}{1}
+In your abstract you should aim to summarise the core contributions of your work in the context of the problem domain.
+Start by outlining the domain and the problems posed within it.
+Discuss how the methods you focus on approach the relevant problems.
+You should end your abstract by concretely stating the tangible outputs and deliverables you have created in order to complete your work on this document, and whether those outputs represent and improvement or alternative approach to existing methods.
+
+Your abstract should be a couple or so paragraphs long, and roughly approximate the order and flow you then use for structuring the main document.
+If a viewer has read your abstract then they should already understand at a high level what it is you have created and delivered, and whether it is better than or comparable to existing methods.
+If your project is driven by a research hypothesis then the reader should know what that is at a high level from this section.
+Reading on, little should surprise the viewer.
+
+For paper submission of your thesis you should physically sign your name and add the date for each of the above declaration statements (black ink preferred).
+For digital submissions it is normally enough to simply type your name (see custard.cls), though you should sign and date them digitally using a touch or stylus input if at all possible.
+	\end{abstract}
+	
+% A long form dedication (optional).
+	\ifdraftdoc\else
+	\begin{Acknowledgements}
+This is an opportunity to acknowledge and thank those who have supported you throughout your studies.
+Friends and colleagues who you have studied alongside, your families, and your mentors within the department are the usual suspects. 
+	\end{Acknowledgements}
+	\fi
+	
+% Build the table of contents page.
+	\tableofcontents*
+	 
+% Optionally you can make a bank of known acronyms in acronyms.tex that you can call on throughout your document.
+	%\input{acronyms} 
+	
+% For long documents like a Doctoral thesis you often include a list of tables and 
+% figures that are used throughout your document. The command below uses a
+% shortened version of each table and figure caption (specified by you - see examples 
+% throughout) and enumerates all of them with their table or figure number. This 
+% process is automatic - just uncomment the lines below to use it.
+	%\newpage
+	%\listoftables
+	%\mtcaddchapter 
+	%\newpage
+	%\listoffigures
+	%\mtcaddchapter
+
+% If you use todo notes, you want to make sure you fix them all before final submission
+	\ifnum\totvalue{todocounter}>0
+		\listoftodos
+	\fi
+
+% Reset numeric page numbering from page 1
+	\mainmatter
+
+% Insert the source file for each of your chapters
+	\input{./chapters/thesis_intro}
+	\input{./chapters/thesis_resources}
+	\input{./chapters/thesis_typesetting}
+	\input{./chapters/thesis_conclusion}
+
+% Insert the bibliography using citations contained in the file citations.bib
+	\bibintoc % Whether to list the bibliography in the Table of Contents (or: \nobibintoc)
+	\bibliography{citations} 
+	
+% In the appendix you might include a full code listing for an implemented algorithm 
+% that you showed a small chunk of in one of your chapters. If you have extra graphs 
+% you might enumerate them within the appendix and use \label{name} and \cref{name} 
+% to automatically insert the correct section locations when you talk about them in your 
+% chapters. It is *not* necessary to include all of your implementation code as an 
+% appendix; instead, focus on the important highlights so they do not get drowned out.
+% Within appendix.tex you should use chapters as the top level section dividers.
+	\ifdraftdoc\else
+	\appendix
+	\addappheadtotoc
+	\input{./chapters/appendix}
+	\fi
+	
+\end{document}
